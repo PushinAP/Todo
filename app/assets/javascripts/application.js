@@ -13,3 +13,18 @@
 //= require rails-ujs
 //= require activestorage
 //= require_tree .
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+
+function showForm() {
+	return document.getElementById('forms').style.display = 'block';
+}
+
+function submitForm() {
+	return document.getElementById('new_todo').submit();
+}
+ 
+function hideForm () {
+	return document.getElementById('forms').style.display = 'none';
+}

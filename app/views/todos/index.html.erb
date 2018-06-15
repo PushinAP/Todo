@@ -1,0 +1,18 @@
+<% @projects.each do |project| %>
+	<h3> <%= project.title %> </h3>
+	<% project.todos.each do |todo| %>
+		<ul>
+			<li><%= todo.text %></li>
+		</ul>
+	<% end %>
+<% end %>
+
+<div id='forms'>
+	<%= form_for @todo do |f| %>
+		<%= f.text_field:text %></br>
+		<% projects_array = Project.all.map { |project| [project.title, project.id] } %>
+		<%= f.select :project_id, projects_array %><br>
+		<%= link_to "Oтмена", "#", :onclick => "hideForm()" %>
+		<%= link_to  "Ok", '#', :onclick => "submitForm()" %>
+	<% end %>
+</div>
