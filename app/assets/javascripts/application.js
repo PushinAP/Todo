@@ -10,21 +10,38 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery3
 //= require rails-ujs
 //= require activestorage
 //= require_tree .
-//= require jquery3
 //= require popper
 //= require bootstrap-sprockets
 
+
 function showForm() {
-	return document.getElementById('forms').style.display = 'block';
+	document.getElementById('notactive').style.display = 'block';
+	document.getElementById('forms').style.display = 'block';
 }
 
-function submitForm() {
-	return document.getElementById('new_todo').submit();
+function submitForm(id) {
+	document.getElementById(id).submit();
+	
 }
  
 function hideForm () {
-	return document.getElementById('forms').style.display = 'none';
+	document.getElementById('notactive').style.display = 'none';
+	document.getElementById('forms').style.display = 'none';
 }
+
+/*$(document).ready(function(){
+  $('input').iCheck({
+    checkboxClass: 'icheckbox_square-blue',
+     radioClass: 'iradio_square-blue',
+     increaseArea: '20%'
+  });
+
+  $('#_1').on('ifChanged', function(event){
+  	alert(event.type);
+	});
+});*/
+

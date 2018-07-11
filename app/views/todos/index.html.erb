@@ -1,18 +1,29 @@
-<% @projects.each do |project| %>
-	<h3> <%= project.title %> </h3>
-	<% project.todos.each do |todo| %>
-		<ul>
-			<li><%= todo.text %></li>
-		</ul>
+<div class='row'>
+	<% @projects.each do |project| %>
+		<div class='col-12 col-md-4 offset-md-2 col-lg-3 offset-lg-1' id='todo'>
+			<h3> <%= project.title %> </h3>
+			<% project.todos.each do |todo| %>
+				<ul>
+						<li>
+							<%= form_tag root_path, {method: :patch, :id => todo.id} do %>
+								<%= check_box_tag(:id, todo.id, todo.isComplited, {:onclick => "submitForm('#{todo.id}')"}) %>
+								<%= label_tag(:id, todo.text) %>
+							<%end%>
+						</li>
+				</ul>
+			<% end %>
+		</div>
 	<% end %>
-<% end %>
+</div>
+
 
 <div id='forms'>
-	<%= form_for @todo do |f| %>
-		<%= f.text_field:text %></br>
-		<% projects_array = Project.all.map { |project| [project.title, project.id] } %>
-		<%= f.select :project_id, projects_array %><br>
-		<%= link_to "Oтмена", "#", :onclick => "hideForm()" %>
-		<%= link_to  "Ok", '#', :onclick => "submitForm()" %>
-	<% end %>
+	<h4>Новая задача</h4>
+		<%= form_for root_path, :html=>{:id=> 'new_todo'} do |f| %>
+			<%= f.text_field :text %></br>
+			<% projects_array = Project.all.map { |project| [project.title, project.id] } %>
+			<%= f.select :project_id, projects_array %><br>
+			<%= link_to "Oтмена", "#", :onclick => "hideForm()" %>
+			<%= link_to  "Ok", '#', :onclick => "submitForm('new_todo')" %>
+		<% end %>	
 </div>

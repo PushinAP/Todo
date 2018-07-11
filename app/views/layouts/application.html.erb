@@ -10,7 +10,11 @@
   </head>
 
   <body>
-    <%= render 'layouts/header'%>
-    <%= yield %>
+    <input type="checkbox" onchange="alert('pos')">
+    <div id='notactive'></div>
+    <div class='io'>
+      <%= render 'layouts/header'%>
+      <%= yield %>   
+    </div>
   </body>
 </html>
