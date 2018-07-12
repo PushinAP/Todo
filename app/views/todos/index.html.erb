@@ -2,16 +2,25 @@
 	<% @projects.each do |project| %>
 		<div class='col-12 col-md-4 offset-md-2 col-lg-3 offset-lg-1' id='todo'>
 			<h3> <%= project.title %> </h3>
-			<% project.todos.each do |todo| %>
-				<ul>
-						<li>
-							<%= form_tag root_path, {method: :patch, :id => todo.id} do %>
-								<%= check_box_tag(:id, todo.id, todo.isComplited, {:onclick => "submitForm('#{todo.id}')"}) %>
+			<table>
+				<% project.todos.each do |todo| %>
+					<tr>
+						<td>
+							<%= form_tag root_path, { method: :patch, :id => todo.id } do %>
+								<%= check_box_tag(:id, todo.id, todo.isComplited, 
+															{ :onclick => "submitForm('#{todo.id}')", 
+															:disabled => todo.isComplited }) %>
 								<%= label_tag(:id, todo.text) %>
 							<%end%>
-						</li>
-				</ul>
-			<% end %>
+						</td>
+						<td>
+							<% if todo.isComplited %>
+								<%= link_to 'Delete', '#'%>
+							<% end %> 
+						</td>
+					</tr>
+				<% end %>
+			</table>
 		</div>
 	<% end %>
 </div>
